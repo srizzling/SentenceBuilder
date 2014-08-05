@@ -1,16 +1,21 @@
 import os, yaml, requests
+import bottle
 from bottle import route, run, template, request
 
 with open('users.yml', 'r') as f:
 	config = yaml.load(f)
+	f.close()
 
 @route('/receive', method='POST')
 def receive():
+	print("I am here")
 	postdata = request.body.read()
 	data_array = postdata.split(" ")
+	print("I am here")
 	with open("data.txt", "a") as f:
 		for word in data_array:
 			f.write(word + "\n")
+		f.close()
 
 
 @route('/send')
@@ -21,6 +26,7 @@ def send():
 			content = f.readlines()
 			content = [word.strip() for word in content]
 			data = ' '.join(content)
+			f.close()
 	return ''' 
 	<h1> Sending Data To </h1>
 		<form action="send" method="post">
@@ -50,4 +56,4 @@ def clear():
 	<p> Sentence Cleared </p>
 	'''
 
-run(host='0.0.0.0', port=8900, debug=True)
+run(host='0.0.0.0', port=8990)
