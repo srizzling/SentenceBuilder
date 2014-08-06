@@ -5,6 +5,6 @@ loop {
   text =  connection.recv(1024)
   puts "received:" + text
   File.open('data.txt', 'w') { |file| file.write(text) }
-  connection.write "Message Recieved"
+  connection.write "Sriram has recieved your message"
   connection.close
 }
