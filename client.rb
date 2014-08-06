@@ -21,7 +21,6 @@ def create_socket
 	end
 	puts "Sending Message: " + word
 	a.write word
-	puts "got back:" + a.recv(200000000)
 	a.close
 end
 
